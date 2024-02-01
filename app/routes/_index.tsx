@@ -1,5 +1,4 @@
-import type { MetaFunction } from "@remix-run/node";
-import { createLogger } from "winston";
+import type { LoaderFunction, MetaFunction } from "@remix-run/node";
 
 export const meta: MetaFunction = () => {
   return [
@@ -8,9 +7,13 @@ export const meta: MetaFunction = () => {
   ];
 };
 
-export const loader = () => {
-  const logger = createLogger();
-  logger.info("hello");
+export const loader: LoaderFunction = ({ context }) => {
+  // This doesn't work
+  // const logger = createLogger();
+  // logger.info("hello");
+
+  context.logger.info("hello");
+  return null;
 };
 
 export default function Index() {
